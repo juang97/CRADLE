@@ -43,7 +43,7 @@ body {
 }
 .navigation{
 	background-color: black;
-	position: fixed;
+	position: absolute;
 	left:0;
 	top:0;
 	text-align: left;
@@ -54,7 +54,7 @@ body {
 #logo {
 	color: white;
 	padding: 0px 50px;
-	position: fixed;
+	position: absolute;
 }
 
 input { 

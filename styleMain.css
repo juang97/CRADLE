@@ -29,7 +29,7 @@ body {
 }
 .navigation{
 	background-color: black;
-	position: fixed;
+	position: absolute;
 	left:0;
 	top:0;
 	text-align: left;
@@ -37,17 +37,16 @@ body {
 	height: 6%;
 }
 #logo {
+	width: 5px;
+	height: 5px;
+	position:absolute;
 	color: white;
-	padding: 0px 60px;
 	top: 0%;
-	position:fixed;
-	align-content: center;
-	text-align: center;
-	vertical-align: middle;
+	left: 4%;
 }
 
 .menu_btn {
-	position: fixed;
+	position:fixed;
 	vertical-align: middle;
 	padding: 0px 0px;
 	top: 1%;
@@ -58,7 +57,7 @@ body {
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
-    top: 0;
+    top: 6%;
     left: 0;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
