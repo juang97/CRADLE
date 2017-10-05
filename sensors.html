@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sensors</title>
+<link href="sensorsStyle.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="sideBar.json"></script>
+		<div class="navigation">
+  			<!--<img src="menu_button2.png" alt="" width="30" height="30" class="menu_btn" onClick="openNav()"/> -->
+  			
+		</div>
+		<h4 class="logo" onClick="openNav()"><a herf="#">CRADLE</a></h4>
+	</head>
+	
+<body>
+		<div id="mySidenav" class="sidenav">
+ 			 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  			<a href="#">About</a>
+  			<a href="sensors.html">Sensors</a>
+  			<a href="#">Analysis</a>
+		</div>
+
+		<!-- Use any element to open the sidenav -->
+		<!--<span onclick="openNav()" class="open-menu">click here</span>-->
+
+		<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+		<div id="main">
+		<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sensors</th>
+                            <th><input name="select_all" value="1" type="checkbox"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td>1</td>
+                            <td>Body Position</td>
+                            <td><input type="checkbox" name="sensor1" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>2</td>
+                            <td>Pulsiometer</td>
+                            <td><input type="checkbox" name="sensor2" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>3</td>
+                            <td>Electrocardiogram (ECG or EKG)</td>
+                            <td><input type="checkbox" name="sensor3" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>4</td>
+                            <td>AirFlow</td>
+                            <td><input type="checkbox" name="sensor4" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>5</td>
+                            <td>Blood Pressure Monitor</td>
+                            <td><input type="checkbox" name="sensor5" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>6</td>
+                            <td>Electromyography</td>
+                            <td><input type="checkbox" name="sensor6" /></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>7</td>
+                            <td>Galvanic Skin Response</td>
+                            <td><input type="checkbox" name="sensor7" /></td>
+                        </tr>
+                        
+                        
+
+                    </tbody>
+                </table>
+		</div>
+    </body>
+</html>
