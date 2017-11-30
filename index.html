@@ -4,6 +4,33 @@
 		<meta charset="utf-8">
 		<title>CRADLE Login</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="index.json"></script>
+	<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>-->
+	<script>
+        function callAwsLambdaFunction() {
+            var params= JSON.stringify({
+                "httpMethod": "POST"
+            })
+            var http = new XMLHttpRequest();
+            http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
+
+            http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            http.setRequestHeader("Content-length", params.length);
+            http.setRequestHeader("Connection", "close");
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("server").innerHTML = "success";
+                }
+                else {
+                    document.getElementById("server").innerHTML = "error";
+                }
+            };
+           // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
+            http.send(params);
+
+        }
+    </script>
 	</head>
 
 	<body>
@@ -13,11 +40,13 @@
 		<div class = "login">
 			<h1>Login</h1>
 			<form method="post">
-				<input type="text" name="u" placeholder="Username" required="required"/>
-				<input type="password" name="p" placeholder="Password" required="required"/>
-				<a class="btn-primary btn-block btn-large tag" href="starter.html" style="text-decoration:none;">Login</a>
+				<input type="text" name="u" placeholder="Username" required="required" id="username"/>
+				<input type="password" name="p" placeholder="Password" required="required" id="password"/>
+				<input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="login" id="submit" onClick="callAwsLambdaFunction()"/>
+				<!--<a class="btn-primary btn-block btn-large tag" href="starter.html" style="text-decoration:none;">Login</a>-->
 			
 				<h5>Forgot password? Click here</h5>
+				<h5 id="server">Testing...</h5>
 			</form>	
 		</div>
 	
