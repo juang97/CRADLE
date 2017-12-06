@@ -4,14 +4,16 @@
 		<meta charset="utf-8">
 		<title>CRADLE Login</title>
     <link href="style.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="index.json"></script>
+	<!--<script type="text/javascript" src="index.json"></script>-->
 	<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>-->
 	<script>
         function callAwsLambdaFunction() {
-            var params= JSON.stringify({
-                "httpMethod": "POST"
-            })
+			
+            var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}});
+			//{'httpMethod': 'POST', 'body':{TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}
+										
             var http = new XMLHttpRequest();
+			
             http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
@@ -23,7 +25,7 @@
                     document.getElementById("server").innerHTML = "success";
                 }
                 else {
-                    document.getElementById("server").innerHTML = "error";
+                    document.getElementById("server").innerHTML = this.response;
                 }
             };
            // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
@@ -35,7 +37,7 @@
 
 	<body>
 		<div class="navigation">
-			<h4 id="logo">CRADLE P</h4>
+			<h4 id="logo">CRADLE</h4>
 		</div>
 		<div class = "login">
 			<h1>Login</h1>
