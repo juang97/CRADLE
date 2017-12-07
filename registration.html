@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CRADLE Registration</title>
+    <link href="styleRegistration.css" rel="stylesheet" type="text/css">
+	
+	<script>
+        function callAwsLambdaFunction() {
+			
+										
+            var http = new XMLHttpRequest();
+			
+			http.responseType = 'json';
+			
+            http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleResgistration", true);
+			
+			var enteredUsername = document.getElementById("username").value;
+			var enteredPassword = document.getElementById("password").value;
+			var enteredFirstName = document.getElementById("firstName").value;
+			var enteredLastName = document.getElementById("lastName").value;
+			
+			
+			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'Item':{'FirstName': {'S': enteredFirstName}, 'LastName': {'S': enteredLastName},'Username': {'S': enteredUsername}, 'Password': {'S': enteredPassword}, 'UID': {'S': guid()}}}});
+			
+
+            http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+					window.open("index.html","_self"); 
+                }
+                else {
+                    document.getElementById("server").innerHTML = "error";
+                }
+            };
+           // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
+            http.send(params);
+
+        }
+		function guid() {
+  			function s4() {
+				return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +s4() + '-' + s4() + s4() + s4();
+}
+    </script>
+	</head>
+
+	<body>
+		<div class="navigation">
+			<h4 id="logo">CRADLE</h4>
+		</div>
+	<div class = "login">
+			<h1>Registration</h1>
+			<form method="post">
+				<input type="text" name="f" placeholder="First Name" required="required" id="firstName"/>
+				<input type="text" name="l" placeholder="Last Name" required="required" id="lastName"/>
+				<input type="text" name="u" placeholder="Username" required="required" id="username"/>
+				<input type="password" name="p" placeholder="Password" required="required" id="password"/>
+			  <input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="Register" id="submit" onClick="callAwsLambdaFunction()"/>
+				<!--<a class="btn-primary btn-block btn-large tag" href="starter.html" style="text-decoration:none;">Login</a>-->
+			
+				<h5 id="server"></h5>
+	  </form>	
+	</div>
+	
+	</body>
+</html>

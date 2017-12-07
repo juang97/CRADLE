@@ -37,7 +37,7 @@
 					
 					if((enteredUsername==serverUsername)&&(enteredPassword==serverPassword) ){
 						document.getElementById("server").innerHTML = "success";
-						//window.open("main.html","_self"); 
+						window.open("main.html","_self"); 
 					}
 					//if(){
 						//document.getElementById("server").innerHTML =JSON.parse(this.response);
@@ -70,7 +70,7 @@
 			  <input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="login" id="submit" onClick="callAwsLambdaFunction()"/>
 				<!--<a class="btn-primary btn-block btn-large tag" href="starter.html" style="text-decoration:none;">Login</a>-->
 			
-				<h5>Forgot password? Click here</h5>
+				<h5><a href="registration.html">Create an account? Click here</a></h5>
 				<h5 id="server">Testing...</h5>
 	  </form>	
 	</div>
