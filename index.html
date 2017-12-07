@@ -9,23 +9,46 @@
 	<script>
         function callAwsLambdaFunction() {
 			
-            var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}});
+            //var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}});
 			//{'httpMethod': 'POST', 'body':{TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}
 										
             var http = new XMLHttpRequest();
 			
+			http.responseType = 'json';
+			
             http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
+			
+			var enteredUsername = document.getElementById("username").value;
+			var enteredPassword = document.getElementById("password").value;
+			
+			
+			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': enteredUsername}, 'Password': {'S': enteredPassword}}}});
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-            http.setRequestHeader("Content-length", params.length);
-            http.setRequestHeader("Connection", "close");
 
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("server").innerHTML = "success";
+					var struct = this.response;
+					
+					
+					var serverUsername = struct['body'].Items[0].Username;
+					var serverPassword = struct['body'].Items[0].Password;
+					
+					
+					if((enteredUsername==serverUsername)&&(enteredPassword==serverPassword) ){
+						document.getElementById("server").innerHTML = "success";
+						//window.open("main.html","_self"); 
+					}
+					//if(){
+						//document.getElementById("server").innerHTML =JSON.parse(this.response);
+					//}
+					//document.getElementById("server").innerHTML = struct['body'].Items[0].Username; 
+                    //document.getElementById("server").innerHTML = this.responseXML.body;
+					//var firstName = this.response.getElementById("FirstName");
+					
                 }
                 else {
-                    document.getElementById("server").innerHTML = this.response;
+                    document.getElementById("server").innerHTML = "invalid username and password, please try again";
                 }
             };
            // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
@@ -39,18 +62,18 @@
 		<div class="navigation">
 			<h4 id="logo">CRADLE</h4>
 		</div>
-		<div class = "login">
+	<div class = "login">
 			<h1>Login</h1>
 			<form method="post">
 				<input type="text" name="u" placeholder="Username" required="required" id="username"/>
 				<input type="password" name="p" placeholder="Password" required="required" id="password"/>
-				<input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="login" id="submit" onClick="callAwsLambdaFunction()"/>
+			  <input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="login" id="submit" onClick="callAwsLambdaFunction()"/>
 				<!--<a class="btn-primary btn-block btn-large tag" href="starter.html" style="text-decoration:none;">Login</a>-->
 			
 				<h5>Forgot password? Click here</h5>
 				<h5 id="server">Testing...</h5>
-			</form>	
-		</div>
+	  </form>	
+	</div>
 	
 	</body>
 </html>
