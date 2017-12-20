@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Readings</title>
+		<link href="styleReadingsPage.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="sideBar.json"></script>
+		<div class="navigation">
+  			<!--<img src="menu_button2.png" alt="" width="30" height="30" class="menu_btn" onClick="openNav()"/> -->
+  			
+		</div>
+		<h4 class="logo" onClick="openNav()"><a herf="#">CRADLE</a></h4>
+		
+		<script>
+        function callAwsLambdaFunction() {
+										
+            var http = new XMLHttpRequest();
+			
+			http.responseType = 'json';
+			
+            http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleDownloadTest", true);
+			
+			
+			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'Item': {'testType': 'AirFlow', 'PatientID': 'P675482'}}});
+
+            http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+					var struct = this.response;
+				
+						document.getElementById("server").innerHTML = "success";
+					}
+                }
+                else {
+                    document.getElementById("server").innerHTML = "invalid";
+                }
+            };
+           // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
+            http.send(params);
+
+        }
+    </script>
+		
+	</head>
+	
+	<body>
+		<div id="mySidenav" class="sidenav">
+ 			 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  			<a href="#">About</a>
+  			<a href="sensors.html">Sensors</a>
+  			<a href="#">Analysis</a>
+		</div>
+
+		<div id="main">
+			<h5 id="server">Testing...</h5>
+			<button onClick= "callAwsLambdaFunction()"> click me!</button>
+			
+		</div>
+    </body>
+</html>
