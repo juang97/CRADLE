@@ -13,6 +13,7 @@
 		
 		<script>
         function callAwsLambdaFunction() {
+			document.getElementById('server2').innerHTML = localStorage.getItem("result");
 										
             var http = new XMLHttpRequest();
 			
@@ -21,17 +22,19 @@
             http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleDownloadTest", true);
 			
 			
-			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'Item': {'testType': 'AirFlow', 'PatientID': 'P675482'}}});
+			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'testType': localStorage.getItem("result"), 'PID': document.getElementById("PatientID").value}});
+			//var paramsToPass = json.loads(params);
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
 					var struct = this.response;
+						var patientID = struct['body'].Items[0].PID;
 				
-						document.getElementById("server").innerHTML = "success";
+						document.getElementById("server").innerHTML = patientID;
+						//window.onload.getElementById("server").innerHTML = patientID;
 					}
-                }
                 else {
                     document.getElementById("server").innerHTML = "invalid";
                 }
@@ -53,9 +56,16 @@
 		</div>
 
 		<div id="main">
+			<h4>Please enter a PID to view results</h4>
+				<form method="post">
+					<input type="text" name="v" placeholder="PID" required="required" id="PatientID"/>
+					<input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="View" id="submit" onClick="callAwsLambdaFunction()"/>
+					<!--<button onClick= "callAwsLambdaFunction()"> click me!</button> -->
+				</form>
 			<h5 id="server">Testing...</h5>
-			<button onClick= "callAwsLambdaFunction()"> click me!</button>
+			<h5 id="server2">Testing...</h5>
 			
 		</div>
+			
     </body>
 </html>

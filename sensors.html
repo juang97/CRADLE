@@ -5,6 +5,13 @@
 <title>Sensors</title>
 <link href="sensorsStyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="sideBar.json"></script>
+	<script>
+		function passJQueryString(testType){
+			//var value = JSON.stringify(testType);
+			localStorage.setItem("result", testType);
+		}
+	</script>
+	
 		<div class="navigation">
   			<!--<img src="menu_button2.png" alt="" width="30" height="30" class="menu_btn" onClick="openNav()"/> -->
   			
@@ -37,19 +44,19 @@
                     <tbody>
                         <tr class="odd gradeX">
                             <td>1</td>
-							<td><a href="readingsPage.html">Air Flow</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('AirFlow')">Air Flow</a></td>
 							<td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor1" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>2</td>
-							<td><a href="readingsPage.html">Body Position</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('BodyPosition')" > Body Position</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor2" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>3</td>
-							<td><a href="readingsPage.html">Electrocardiogram (ECG)</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('BodyPosition')">Electrocardiogram (ECG)</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor3" /></td>
                         </tr>
@@ -78,6 +85,7 @@
                     </tbody>
                 </table>
               <a class="btn-primary btn-block btn-large tag" href="#" style="text-decoration:none;">Run Analysis</a>
+			<h5 id="test"> testing</h5>
 		</div>
     </body>
 </html>
