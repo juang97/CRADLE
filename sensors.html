@@ -7,7 +7,6 @@
 <script type="text/javascript" src="sideBar.json"></script>
 	<script>
 		function passJQueryString(testType){
-			//var value = JSON.stringify(testType);
 			localStorage.setItem("result", testType);
 		}
 	</script>
@@ -50,31 +49,31 @@
                         </tr>
                         <tr class="odd gradeX">
                             <td>2</td>
-							<td><a href="readingsPage.html" onClick="passJQueryString('BodyPosition')" > Body Position</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('BodyPosition')" >Body Position</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor2" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>3</td>
-							<td><a href="readingsPage.html" onClick="passJQueryString('BodyPosition')">Electrocardiogram (ECG)</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('ECG')">Electrocardiogram (ECG)</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor3" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>4</td>
-							<td><a href="readingsPage.html">Electromyography (EMG)</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('EMG')">Electromyography (EMG)</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor4" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>5</td>
-							<td><a href="readingsPage.html">Galvanic Skin Response</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('GSR')">Galvanic Skin Response</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor5" /></td>
                         </tr>
                         <tr class="odd gradeX">
                             <td>6</td>
-							<td><a href="readingsPage.html">Oxygen Saturation (SPO2)</a></td>
+							<td><a href="readingsPage.html" onClick="passJQueryString('SPO2')">Oxygen Saturation (SPO2)</a></td>
                             <td>mm/dd/yyyy</td>
                             <td><input type="checkbox" name="sensor6" /></td>
                         
@@ -85,7 +84,6 @@
                     </tbody>
                 </table>
               <a class="btn-primary btn-block btn-large tag" href="#" style="text-decoration:none;">Run Analysis</a>
-			<h5 id="test"> testing</h5>
 		</div>
     </body>
 </html>

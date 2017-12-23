@@ -13,7 +13,6 @@
 		
 		<script>
         function callAwsLambdaFunction() {
-			document.getElementById('server2').innerHTML = localStorage.getItem("result");
 										
             var http = new XMLHttpRequest();
 			
@@ -23,23 +22,71 @@
 			
 			
 			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'testType': localStorage.getItem("result"), 'PID': document.getElementById("PatientID").value}});
-			//var paramsToPass = json.loads(params);
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
 					var struct = this.response;
-						var patientID = struct['body'].Items[0].PID;
+					
+					if(localStorage.getItem("result") == "AirFlow"){
+						var intensity = struct['body'].Items[0].Intensity;
+						var PPM = struct['body'].Items[0].PPM;
+						var testDate = struct['body'].Items[0].TestDate;
 				
-						document.getElementById("server").innerHTML = patientID;
-						//window.onload.getElementById("server").innerHTML = patientID;
+						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
+						document.getElementById("server2").innerHTML = "intensity: " + intensity;
+						document.getElementById("server3").innerHTML = "PPM: " + PPM;
+						
 					}
+					else if(localStorage.getItem("result") == "BodyPosition"){
+						var testDate = struct['body'].Items[0].TestDate;
+						var xVal = struct['body'].Items[0].XValues;
+						var yVal = struct['body'].Items[0].YValues;
+						var zVal = struct['body'].Items[0].ZValues;
+						
+						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
+						document.getElementById("server2").innerHTML = "X-Values: " + xVal;
+						document.getElementById("server3").innerHTML = "Y-Values: " + yVal;
+						document.getElementById("server4").innerHTML = "Z-Values: " + zVal;
+						
+					}
+					else if(localStorage.getItem("result") == "ECG"){
+						var testDate = struct['body'].Items[0].TestDate;
+						var bpm = struct['body'].Items[0].BPM;
+						var signal = struct['body'].Items[0].Signal;
+						
+						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
+						document.getElementById("server2").innerHTML = "BPM: " + bpm;
+						document.getElementById("server3").innerHTML = "Signal: " + signal;
+						
+					}
+					else if(localStorage.getItem("result") == "EMG"){
+						var testDate = struct['body'].Items[0].TestDate;
+						var cpm = struct['body'].Items[0].CPM;
+						var signal = struct['body'].Items[0].Signal;
+						
+						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
+						document.getElementById("server2").innerHTML = "CPM: " + cpm;
+						document.getElementById("server3").innerHTML = "Signal: " + signal;
+					
+					}
+					else if(localStorage.getItem("result") == "GSR"){
+						var testDate = struct['body'].Items[0].TestDate;
+						var gsrConductance = struct['body'].Items[0].GSRConductanceResults;
+						var gsrResistance = struct['body'].Items[0].GSRResistanceResults;
+						
+						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
+						document.getElementById("server2").innerHTML = "Conductance: " + gsrConductance;
+						document.getElementById("server3").innerHTML = "Resistance: " + gsrResistance;
+					
+					}
+					//SPO2 to be made...
+				}
                 else {
-                    document.getElementById("server").innerHTML = "invalid";
+                    document.getElementById("serverRes").innerHTML = "Invalid Patient ID, please try again";
                 }
             };
-           // xhttp.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleLogin", true);
             http.send(params);
 
         }
@@ -50,22 +97,26 @@
 	<body>
 		<div id="mySidenav" class="sidenav">
  			 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  			<a href="#">About</a>
+  			<a href="main.html">About</a>
   			<a href="sensors.html">Sensors</a>
   			<a href="#">Analysis</a>
 		</div>
 
-		<div id="main">
+		<div class="main">
 			<h4>Please enter a PID to view results</h4>
 				<form method="post">
 					<input type="text" name="v" placeholder="PID" required="required" id="PatientID"/>
 					<input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="View" id="submit" onClick="callAwsLambdaFunction()"/>
 					<!--<button onClick= "callAwsLambdaFunction()"> click me!</button> -->
+					<h6 id="serverRes"></h6>
+					
+					<h5 id="server1"></h5>
+					<h5 id="server2"></h5>
+					<h5 id="server3"></h5>
+					<h5 id="server4"></h5>
+			
 				</form>
-			<h5 id="server">Testing...</h5>
-			<h5 id="server2">Testing...</h5>
 			
 		</div>
-			
     </body>
 </html>
