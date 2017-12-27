@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
 		<title>CRADLE Login</title>
     <link href="style.css" rel="stylesheet" type="text/css">
 	<!--<script type="text/javascript" src="index.json"></script>-->
@@ -11,7 +12,6 @@
 			
             //var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}});
 			//{'httpMethod': 'POST', 'body':{TableName': 'Users', 'Key': {'Username': {'S': 'cazzara'}, 'Password': {'S': 'abc123'}}}
-										
             var http = new XMLHttpRequest();
 			
 			http.responseType = 'json';
@@ -25,11 +25,16 @@
 			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'TableName': 'Users', 'Key': {'Username': {'S': enteredUsername}, 'Password': {'S': enteredPassword}}}});
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-
+			
+			http.setRequestHeader("Access-Control-Allow-Origin", "*");
+			 //http.setRequestHeader("Allow-Control-Allow-Origin", "*");
+    		 //http.setRequestHeader("Access-Control-Allow-Credentials", "true");
+    		 //http.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    		 //http.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+			
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
 					var struct = this.response;
-					
 					
 					var serverUsername = struct['body'].Items[0].Username;
 					var serverPassword = struct['body'].Items[0].Password;
