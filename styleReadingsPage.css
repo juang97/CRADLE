@@ -142,6 +142,32 @@ body {
 	
 	
 }
+#data-table{
+
+	border: 1px solid white;
+	border-collapse: collapse;
+	border-radius: 5px;
+	table-layout: fixed;
+	top: 20%;
+    
+}
+#myTable{
+	position: relative;
+	color: aliceblue;
+	width: 60%;
+	table-layout: fixed;
+	border-spacing: 0;
+	top: 10%;
+	
+    
+}
+th{
+	border: 1px solid white;
+}
+td{
+	border: 1px solid white;
+	word-wrap: break-word;
+}
 input { 
 	width: 100%; 
 	margin-bottom: 10px; 

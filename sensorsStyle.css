@@ -119,12 +119,13 @@ a:link{
 
 	background-color: white;
 	border-radius: 5px;
-	width: 90%;
+	width: 50%;
 	top: 20%;
+	overflow: auto;
 }
 #main{
 	position: relative;
-    top: 10%;
+    top: 20%;
 }
 th, td {
     text-align: left;

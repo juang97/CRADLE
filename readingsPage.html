@@ -6,13 +6,12 @@
 		<link href="styleReadingsPage.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="sideBar.json"></script>
 		<div class="navigation">
-  			<!--<img src="menu_button2.png" alt="" width="30" height="30" class="menu_btn" onClick="openNav()"/> -->
   			
 		</div>
 		<h4 class="logo" onClick="openNav()"><a herf="#">CRADLE</a></h4>
 		
 		<script>
-        function callAwsLambdaFunction() {
+        window.onload = function() {
 										
             var http = new XMLHttpRequest();
 			
@@ -21,7 +20,7 @@
             http.open("POST", "https://oyseokpdbi.execute-api.us-east-2.amazonaws.com/prod/cradleDownloadTest", true);
 			
 			
-			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'testType': localStorage.getItem("result"), 'PID': document.getElementById("PatientID").value}});
+			var params= JSON.stringify({'httpMethod': 'POST', 'body':{'testType': localStorage.getItem("result")}});
 
             http.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
@@ -30,61 +29,177 @@
 					var struct = this.response;
 					
 					if(localStorage.getItem("result") == "AirFlow"){
-						var intensity = struct['body'].Items[0].Intensity;
-						var PPM = struct['body'].Items[0].PPM;
-						var testDate = struct['body'].Items[0].TestDate;
-				
-						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
-						document.getElementById("server2").innerHTML = "intensity: " + intensity;
-						document.getElementById("server3").innerHTML = "PPM: " + PPM;
+						
+						var table = document.getElementById("data-table");
+						var row = table.insertRow(0);
+							
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						
+						cell1.innerHTML = "PID";
+						cell2.innerHTML = "Test Date";
+						cell3.innerHTML = "Intensity";
+						cell4.innerHTML = "PPM";
+						
+        				for(var i=0; i<struct['body'].Items.length; i++){
+							
+							var row = table.insertRow(i+1);
+							
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							
+							cell1.innerHTML = struct['body'].Items[i].PID;
+							cell2.innerHTML = struct['body'].Items[i].TestDate;
+							cell3.innerHTML = struct['body'].Items[i].Intensity;
+							cell4.innerHTML = struct['body'].Items[i].PPM;
+							
+							
+						}
 						
 					}
 					else if(localStorage.getItem("result") == "BodyPosition"){
-						var testDate = struct['body'].Items[0].TestDate;
-						var xVal = struct['body'].Items[0].XValues;
-						var yVal = struct['body'].Items[0].YValues;
-						var zVal = struct['body'].Items[0].ZValues;
 						
-						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
-						document.getElementById("server2").innerHTML = "X-Values: " + xVal;
-						document.getElementById("server3").innerHTML = "Y-Values: " + yVal;
-						document.getElementById("server4").innerHTML = "Z-Values: " + zVal;
+						var table = document.getElementById("data-table");
+						var row = table.insertRow(0);
+							
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						
+						cell1.innerHTML = "PID";
+						cell2.innerHTML = "Test Date";
+						cell3.innerHTML = "X-Values";
+						cell4.innerHTML = "Y-Values";
+						cell5.innerHTML = "Z-Values";
+						
+        				for(var i=0; i<struct['body'].Items.length; i++){
+							
+							var row = table.insertRow(i+1);
+							
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							var cell5 = row.insertCell(4);
+							
+							cell1.innerHTML = struct['body'].Items[i].PID;
+							cell2.innerHTML = struct['body'].Items[i].TestDate;
+							cell3.innerHTML = struct['body'].Items[i].XValues;
+							cell4.innerHTML = struct['body'].Items[i].YValues;
+							cell5.innerHTML = struct['body'].Items[i].ZValues;
+							
+							
+						}
 						
 					}
 					else if(localStorage.getItem("result") == "ECG"){
-						var testDate = struct['body'].Items[0].TestDate;
-						var bpm = struct['body'].Items[0].BPM;
-						var signal = struct['body'].Items[0].Signal;
 						
-						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
-						document.getElementById("server2").innerHTML = "BPM: " + bpm;
-						document.getElementById("server3").innerHTML = "Signal: " + signal;
+						var table = document.getElementById("data-table");
+						var row = table.insertRow(0);
+							
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						
+						cell1.innerHTML = "PID";
+						cell2.innerHTML = "Test Date";
+						cell3.innerHTML = "BPM";
+						cell4.innerHTML = "Signal";
+						
+        				for(var i=0; i<struct['body'].Items.length; i++){
+							
+							var row = table.insertRow(i+1);
+							
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							
+							cell1.innerHTML = struct['body'].Items[i].PID;
+							cell2.innerHTML = struct['body'].Items[i].TestDate;
+							cell3.innerHTML = struct['body'].Items[i].BPM;
+							cell4.innerHTML = struct['body'].Items[i].Signal;
+							
+							
+						}
 						
 					}
 					else if(localStorage.getItem("result") == "EMG"){
-						var testDate = struct['body'].Items[0].TestDate;
-						var cpm = struct['body'].Items[0].CPM;
-						var signal = struct['body'].Items[0].Signal;
 						
-						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
-						document.getElementById("server2").innerHTML = "CPM: " + cpm;
-						document.getElementById("server3").innerHTML = "Signal: " + signal;
+						var table = document.getElementById("data-table");
+						var row = table.insertRow(0);
+							
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						
+						cell1.innerHTML = "PID";
+						cell2.innerHTML = "Test Date";
+						cell3.innerHTML = "CPM";
+						cell4.innerHTML = "Signal";
+						
+        				for(var i=0; i<struct['body'].Items.length; i++){
+							
+							var row = table.insertRow(i+1);
+							
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							
+							cell1.innerHTML = struct['body'].Items[i].PID;
+							cell2.innerHTML = struct['body'].Items[i].TestDate;
+							cell3.innerHTML = struct['body'].Items[i].CPM;
+							cell4.innerHTML = struct['body'].Items[i].Signal;
+							
+							
+						}
 					
 					}
 					else if(localStorage.getItem("result") == "GSR"){
-						var testDate = struct['body'].Items[0].TestDate;
-						var gsrConductance = struct['body'].Items[0].GSRConductanceResults;
-						var gsrResistance = struct['body'].Items[0].GSRResistanceResults;
 						
-						document.getElementById("server1").innerHTML = "TestDate: " + testDate;
-						document.getElementById("server2").innerHTML = "Conductance: " + gsrConductance;
-						document.getElementById("server3").innerHTML = "Resistance: " + gsrResistance;
-					
+						var table = document.getElementById("data-table");
+						var row = table.insertRow(0);
+							
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						
+						cell1.innerHTML = "PID";
+						cell2.innerHTML = "Test Date";
+						cell3.innerHTML = "Conductance";
+						cell4.innerHTML = "Resistance";
+						
+        				for(var i=0; i<struct['body'].Items.length; i++){
+							
+							var row = table.insertRow(i+1);
+							
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							
+							cell1.innerHTML = struct['body'].Items[i].PID;
+							cell2.innerHTML = struct['body'].Items[i].TestDate;
+							cell3.innerHTML = struct['body'].Items[i].GSRConductanceResults;
+							cell4.innerHTML = struct['body'].Items[i].GSRResistanceResults;
+							
+							
+						}
 					}
 					//SPO2 to be made...
 				}
                 else {
-                    document.getElementById("serverRes").innerHTML = "Invalid Patient ID, please try again";
+                    
                 }
             };
             http.send(params);
@@ -102,21 +217,16 @@
   			<a href="#">Analysis</a>
 		</div>
 
-		<div class="main">
-			<h4>Please enter a PID to view results</h4>
-				<form method="post">
-					<input type="text" name="v" placeholder="PID" required="required" id="PatientID"/>
+		<!--<div class="main">
 					<input type="button" class="btn-primary btn-block btn-large tag" style="text-decoration:none;" value="View" id="submit" onClick="callAwsLambdaFunction()"/>
-					<!--<button onClick= "callAwsLambdaFunction()"> click me!</button> -->
-					<h6 id="serverRes"></h6>
-					
-					<h5 id="server1"></h5>
-					<h5 id="server2"></h5>
-					<h5 id="server3"></h5>
-					<h5 id="server4"></h5>
+			<h5 id="server1"></h5>
 			
-				</form>
-			
+		</div>-->
+		<div id="myTable">
+			<table id="data-table" class="table table-striped table-bordered nowrap" width="150%" align="center">
+                    
+                    
+			</table>
 		</div>
     </body>
 </html>
